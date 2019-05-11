@@ -6,14 +6,20 @@ public class SO {
     private static int id = 0;
     public static void main(String[] args) {
         int tamanho;
+        int minimo;
+        int maximo;
   
         Scanner input = new Scanner(System.in);
         
         System.out.println("Informe tamanho do vetor de requisições:");
         tamanho = input.nextInt();
+        System.out.println("Informe valor mínimo:");
+        minimo = input.nextInt();
+        System.out.println("Informe valor máximo:");
+        maximo = input.nextInt();
         
-        FilaCircular fila = new FilaCircular(tamanho);   
-        adicionarRequisicao(fila);
+        FilaCircular fila = new FilaCircular(tamanho, minimo, maximo);   
+        /*adicionarRequisicao(fila);
         adicionarRequisicao(fila);
         adicionarRequisicao(fila);
         
@@ -26,10 +32,11 @@ public class SO {
         
         Requisicao sair3 = fila.removerElemento();
         System.out.println("Removido. \nID: " + sair3.getIdentificador() + "TAMANHO: " + sair3.getTamanho());
+        */
     }
-    
+    /*
     public static void adicionarRequisicao(FilaCircular fila){
         id++;
         fila.addElemento(id); 
-    }    
+    } */   
 }

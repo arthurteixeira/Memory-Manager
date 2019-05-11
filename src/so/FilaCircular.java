@@ -1,5 +1,6 @@
 package so;
 
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
@@ -13,8 +14,11 @@ public class FilaCircular {
     private Semaphore empty;
     private Semaphore full;
     private Semaphore mutex;
+    private int idReq = 0;
+    private int maximoReq;
+    private int minimoReq;
     
-    public FilaCircular(int tamanho){
+    public FilaCircular(int tamanho, int minimo, int maximo){
         this.fila = new Requisicao[tamanho];
         this.inicio = 0;
         this.fim = 0;
@@ -22,6 +26,11 @@ public class FilaCircular {
         this.empty = new Semaphore(tamanho);
         this.full = new Semaphore(0);
         this.mutex = new Semaphore(1);
+        this.maximoReq = maximo;
+        this.minimoReq = minimo;
+        for(int i=0; i<tamanho; i++){
+            addElemento(gerarRequisicao());
+        }
     }
     
     private boolean filaCheia(){
@@ -32,15 +41,7 @@ public class FilaCircular {
         return numeroElementos == 0;
     }
     
-    public void addElemento(int id){
-        int tamanho;
-        
-        Scanner input = new Scanner(System.in);
-        
-        System.out.println("Informe tamanho da variavel:");
-        tamanho = input.nextInt();
-        
-        Requisicao objeto = new Requisicao(id, tamanho);
+    public void addElemento(Requisicao objeto){
         if(!filaCheia()){
             
             try {
@@ -97,5 +98,21 @@ public class FilaCircular {
         }else{
             return null;
         }
+    }
+
+    public int getMaximoReq() {
+        return maximoReq;
+    }
+
+    public int getMinimoReq() {
+        return minimoReq;
+    }
+    
+    public Requisicao gerarRequisicao(){
+        Random random = new Random();
+        int tam = random.nextInt(getMaximoReq()) + getMinimoReq();
+        Requisicao nova = new Requisicao(idReq, tam);
+        idReq++;
+        return nova;
     }
 }

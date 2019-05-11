@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Requisicao {
     private int identificador;
-    private int tamanho;
+    private int tamanho; //palavras. exemplo: tamanho = 2, 2 palavras.
     
     public Requisicao(int identificador, int tamanho){
         this.identificador = identificador;

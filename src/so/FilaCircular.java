@@ -28,6 +28,7 @@ public class FilaCircular {
         this.mutex = new Semaphore(1);
         this.maximoReq = maximo;
         this.minimoReq = minimo;
+        //Gera todas as requisições iniciais
         for(int i=0; i<tamanho; i++){
             addElemento(gerarRequisicao());
         }
@@ -94,12 +95,21 @@ public class FilaCircular {
             
             empty.release();
             
+            addElemento(gerarRequisicao()); //Quando remove uma gera outra requisição
             return requisicao;
         }else{
             return null;
         }
     }
-
+    
+    public void impressao(){
+        int i=0;
+        while(i < numeroElementos){
+            System.out.println("ID: " + fila[i].getIdentificador() + " TAMANHO: " + fila[i].getTamanho());
+            i++;
+        }
+    }
+    
     public int getMaximoReq() {
         return maximoReq;
     }

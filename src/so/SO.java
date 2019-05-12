@@ -18,25 +18,10 @@ public class SO {
         System.out.println("Informe valor máximo:");
         maximo = input.nextInt();
         
-        FilaCircular fila = new FilaCircular(tamanho, minimo, maximo);   
-        /*adicionarRequisicao(fila);
-        adicionarRequisicao(fila);
-        adicionarRequisicao(fila);
-        
-        Requisicao sair = fila.removerElemento();
-        System.out.println("Removido. \nID: " + sair.getIdentificador() + "TAMANHO: " + sair.getTamanho());
-        Requisicao sair2 = fila.removerElemento();
-        System.out.println("Removido. \nID: " + sair2.getIdentificador() + "TAMANHO: " + sair2.getTamanho());
-        
-        adicionarRequisicao(fila);
-        
-        Requisicao sair3 = fila.removerElemento();
-        System.out.println("Removido. \nID: " + sair3.getIdentificador() + "TAMANHO: " + sair3.getTamanho());
-        */
+        FilaCircular fila = new FilaCircular(tamanho, minimo, maximo);  
+        fila.impressao();
+        Requisicao g = fila.removerElemento();
+        fila.impressao();
+
     }
-    /*
-    public static void adicionarRequisicao(FilaCircular fila){
-        id++;
-        fila.addElemento(id); 
-    } */   
 }

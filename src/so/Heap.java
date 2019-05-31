@@ -1,71 +1,55 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package so;
 
-/**
- *
- * @author anderson
- */
+import java.util.Random;
+
 public class Heap {
+    private int[] Heap;
+    private int limiarMax;
+    private Tabela[] tabela;
+    private int idTabela;
     
-    private Requisicao[] heap;
-    private int tamanho;
-    private int nelementos;
-    private int maximoReq;
-    private int minimoReq;
-
-    public Heap(int tamanho, int maximoReq, int minimoReq) {
-        this.tamanho = tamanho;
-        this.maximoReq = maximoReq;
-        this.minimoReq = minimoReq;
-        this.heap = new Requisicao[tamanho];
-        this.nelementos = 0;
+    public Heap(int tamanho, int limiarMax){
+        this.Heap = new int[tamanho];
+        this.limiarMax = limiarMax;
+        for(int i = 0; i < tamanho; i++)
+            Heap[i] = 0;
+        this.tabela = new Tabela[Heap.length];
+        this.idTabela = 0;
     }
     
-    private boolean heapVazia(){
-        return this.nelementos == 0;
+    public void alocar(Requisicao nova){
+        int tam = nova.getTamanho();
+        int i = 0, inicio = 0;
+        Random random = new Random();
+        do{
+            if(Heap[i] == 0 && tam > 0){
+                Heap[i] = random.nextInt(1000) + 1;
+                if(tam == nova.getTamanho())
+                    inicio = i;
+                tam--;
+                if(tam == 0){
+                    this.tabela[idTabela] = new Tabela(nova.getIdentificador(), nova.getTamanho(), inicio, i);
+                    idTabela++;
+                }
+            }
+            i++;
+        }while(tam > 0 && i < Heap.length);
+        System.out.println("\nImpressao heap:");
+        this.impressao();
+        System.out.println("\nImpressao tabela:");
+        this.impressaoTab();
     }
     
-    private boolean heapCheia(){
-        return this.nelementos == this.maximoReq;
-    }
-    
-    public void build_heap(Requisicao objeto){
-        if(!heapCheia()){
-            heap[this.nelementos] = objeto;
-            this.nelementos++;
-            percolate( this.nelementos - 1, heap);
+    public void impressao(){
+        for(int i = 0; i < Heap.length; i++){
+            System.out.println("" + Heap[i]);
         }
-        else{
-            
+    }
+    
+    public void impressaoTab(){
+        for(int i = 0; i < idTabela; i++){
+            System.out.println("Id: " + tabela[i].getId() + " Tamanho: " + tabela[i].getTamanho() + " Inicio: " + tabela[i].getInicio() + " Fim: " + tabela[i].getFim());
         }
     }
-    
-    private void percolate(int pos, Requisicao[] h){
-	if(pos == 0)	return;
-	int pai = busca_pai(pos);
-        Requisicao aux;
-	if(h[pos].getIdentificador() < h[pai].getIdentificador()){
-		aux = h[pos];
-		h[pos] = h[pai];
-		h[pai] = aux;
-	}
-	percolate( pai, h);
-    }
-    
-    private int busca_filho(int i){
-	i++;
-	i = i * 2-1;
-	return(i);
-    }   
-
-    private int busca_pai(int i){
-	i = i + 1;
-	int aux = i/2-1;
-	return(aux);
-    }
-    
 }

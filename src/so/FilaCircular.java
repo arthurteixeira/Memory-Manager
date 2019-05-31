@@ -1,5 +1,6 @@
 package so;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.Semaphore;
@@ -14,8 +15,9 @@ public class FilaCircular {
     private int idReq = 0;
     private int maximoReq;
     private int minimoReq;
+    private Heap h;
     
-    public FilaCircular(int tamanho, int minimo, int maximo){
+    public FilaCircular(int tamanho, int minimo, int maximo, Heap h){
         this.fila = new Requisicao[tamanho];
         this.inicio = 0;
         this.fim = 0;
@@ -26,6 +28,7 @@ public class FilaCircular {
         for(int i=0; i<tamanho; i++){
             addElemento(gerarRequisicao());
         }
+        this.h = h;
     }
     
     private boolean filaCheia(){
@@ -46,20 +49,20 @@ public class FilaCircular {
         }else{
             System.out.println("Requisição NÃO entrou no vetor de requisições.");
         }
+        System.out.println("\nImpressao vet req:");
+        this.impressao();
     }
     
-    public Requisicao removerElemento(){
+    public void removerElemento(){ 
         if(!filaVazia()){
             Requisicao requisicao = fila[inicio++];
             if(inicio == fila.length){
-               inicio = 0; 
+                inicio = 0; 
             }
             numeroElementos--;
             addElemento(gerarRequisicao()); //Quando remove uma gera outra requisição
-            return requisicao;
-        }else{
-            return null;
-        }
+            h.alocar(requisicao);
+        }        
     }
     
     public void impressao(){
@@ -85,4 +88,9 @@ public class FilaCircular {
         idReq++;
         return nova;
     }
+
+    public Requisicao[] getFila() {
+        return fila;
+    }
+    
 }

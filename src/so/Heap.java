@@ -1,4 +1,3 @@
-
 package so;
 
 import java.util.Random;
@@ -17,8 +16,7 @@ public class Heap {
         this.tabela = new Tabela[Heap.length];
         this.idTabela = 0;
     }
-    
-    public void alocar(Requisicao nova){
+        public void alocar(Requisicao nova){
         int tam = nova.getTamanho();
         int i = 0, inicio = 0;
         Random random = new Random();

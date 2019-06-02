@@ -35,5 +35,6 @@ public class Alocador {
         if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * (mp.getLimiarMax() / 100))){
             dh.desalocadorHeap(mp);
         }
+        mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1);
     }
 }

@@ -6,71 +6,69 @@ import java.util.Scanner;
 import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 public class FilaCircular {
-    private Requisicao[] fila;
-    private int inicio;
-    private int fim;
-    private int numeroElementos;
-    private int idReq = 0;
-    private int maximoReq;
-    private int minimoReq;
-    private Heap h;
+    private Requisicao[] fila;          //Vetor de requisições p/ implementação da fila
+    private int inicio;                 //Aponta p/ inicio da fila
+    private int fim;                    //Aponta p/ o fim da filla
+    private int numeroElementos;        //Num. de elementos na fila
+    private int idReq = 0;              //ID das requisições, usado p/ gerar as requisições
+    private int maximoReq;              //Valor máximo das requisições
+    private int minimoReq;              //Valor mínimo das requisições
+    private Heap h;                     //Cria objeto da heap
+    private Principal atualiza;         //Cria objeto p/ atualização das tabelas na interface
     
-    public FilaCircular(int tamanho, int minimo, int maximo, Heap h){
+    public FilaCircular(int tamanho, int minimo, int maximo, Heap h, Principal p){
         this.fila = new Requisicao[tamanho];
         this.inicio = 0;
         this.fim = 0;
         this.numeroElementos = 0;
         this.maximoReq = maximo;
         this.minimoReq = minimo;
-        //Gera todas as requisições iniciais
+        this.atualiza = p;
+                                                         //Gera todas as requisições iniciais
         for(int i=0; i<tamanho; i++){
             addElemento(gerarRequisicao());
         }
+        this.impressao();
         this.h = h;
     }
     
     private boolean filaCheia(){
-        return numeroElementos == fila.length;
+        return numeroElementos == fila.length;           //Verifica se a fila está cheia;
     }
     
     private boolean filaVazia(){
-        return numeroElementos == 0;
+        return numeroElementos == 0;                     //Verifica se a fila está vazia.
     }
     
-    public void addElemento(Requisicao objeto){
+    public void addElemento(Requisicao objeto){          //Adiciona elementos na fila
         if(!filaCheia()){
             fila[fim++] = objeto;
             numeroElementos++;
             if(fim == fila.length)
                 fim = 0;
             System.out.println("Requisição entrou no vetor de requisições.");
+            
         }else{
             System.out.println("Requisição NÃO entrou no vetor de requisições.");
         }
         System.out.println("\nImpressao vet req:");
-        this.impressao();
+        
     }
     
-    public void removerElemento(){ 
+    public void removerElemento(){                      //Remove elementos da fila
         if(!filaVazia()){
             Requisicao requisicao = fila[inicio++];
             if(inicio == fila.length){
                 inicio = 0; 
             }
             numeroElementos--;
-            addElemento(gerarRequisicao()); //Quando remove uma gera outra requisição
-            h.alocar(requisicao);
+            addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
+            this.impressao();
+            h.alocar(requisicao);                       //Aloca requisição na heap
         }        
-    }
-    
-    public void impressao(){
-        int i=0;
-        while(i < numeroElementos){
-            System.out.println("ID: " + fila[i].getIdentificador() + " TAMANHO: " + fila[i].getTamanho());
-            i++;
-        }
     }
     
     public int getMaximoReq() {
@@ -81,7 +79,7 @@ public class FilaCircular {
         return minimoReq;
     }
     
-    public Requisicao gerarRequisicao(){
+    public Requisicao gerarRequisicao(){                //Função que gera as requisições
         Random random = new Random();
         int tam = random.nextInt(getMaximoReq()) + getMinimoReq();
         Requisicao nova = new Requisicao(idReq, tam);
@@ -89,8 +87,12 @@ public class FilaCircular {
         return nova;
     }
 
-    public Requisicao[] getFila() {
-        return fila;
+    public void impressao(){                            //Função que manda os parametros p/ atualizar as tabelas na classe principal
+        String id, tam;
+        for(int i = 0; i < fila.length; i++){
+            id = "" + fila[i].getIdentificador();
+            tam = "" + fila[i].getTamanho();
+            atualiza.atualizarReq(id, tam, i);
+        }
     }
-    
 }

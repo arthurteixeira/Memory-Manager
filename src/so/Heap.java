@@ -1,4 +1,5 @@
 
+
 package so;
 
 import java.util.Random;
@@ -8,14 +9,16 @@ public class Heap {
     private int limiarMax;
     private Tabela[] tabela;
     private int idTabela;
+    private Principal atualiza;
     
-    public Heap(int tamanho, int limiarMax){
+    public Heap(int tamanho, int limiarMax, Principal p){
         this.Heap = new int[tamanho];
         this.limiarMax = limiarMax;
         for(int i = 0; i < tamanho; i++)
             Heap[i] = 0;
         this.tabela = new Tabela[Heap.length];
         this.idTabela = 0;
+        this.atualiza = p;
     }
     
     public void alocar(Requisicao nova){
@@ -42,8 +45,10 @@ public class Heap {
     }
     
     public void impressao(){
+        String val;
         for(int i = 0; i < Heap.length; i++){
-            System.out.println("" + Heap[i]);
+            val = "" + Heap[i];
+            atualiza.atualizarHeap(val, i);
         }
     }
     

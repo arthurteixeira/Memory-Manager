@@ -21,7 +21,7 @@ public class Tabela {
         return inicio;
     }
 
-    public int getFim() {
+public int getFim() {
         return fim;
     }
 

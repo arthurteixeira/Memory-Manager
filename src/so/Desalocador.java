@@ -12,6 +12,11 @@ package so;
 public class Desalocador {
     
     private int calcId;
+    private Principal atualiza;
+    
+    public Desalocador(Principal p){
+        this.atualiza = p;
+    }
     
     void desalocadorHeap(mapeamentoHeap mp){
         calcId = mp.getUltimoId() - mp.getConstDesalocacao();
@@ -22,7 +27,14 @@ public class Desalocador {
                     mp.setOcupacaoHeap(mp.getOcupacaoHeap() - 1);
                 }
             }
-        }   
+        }
+        
+        //impressao
+        String val;
+        for(int i = 0; i < mp.heap.length; i++){
+            val = "" + mp.heap[i];
+            atualiza.atualizarHeap(val, i);
+       }
     }
     
 }

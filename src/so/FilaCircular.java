@@ -16,10 +16,11 @@ public class FilaCircular {
     private int idReq = 0;              //ID das requisições, usado p/ gerar as requisições
     private int maximoReq;              //Valor máximo das requisições
     private int minimoReq;              //Valor mínimo das requisições
-    private Heap h;                     //Cria objeto da heap
+    private mapeamentoHeap mp;           //Cria objeto da heap
     private Principal atualiza;         //Cria objeto p/ atualização das tabelas na interface
+    private Alocador alocador;
     
-    public FilaCircular(int tamanho, int minimo, int maximo, Heap h, Principal p){
+    public FilaCircular(int tamanho, int minimo, int maximo, mapeamentoHeap mp, Principal p){
         this.fila = new Requisicao[tamanho];
         this.inicio = 0;
         this.fim = 0;
@@ -32,7 +33,8 @@ public class FilaCircular {
             addElemento(gerarRequisicao());
         }
         this.impressao();
-        this.h = h;
+        this.mp = mp;
+        this.alocador = new Alocador(p, mp);
     }
     
     private boolean filaCheia(){
@@ -67,7 +69,7 @@ public class FilaCircular {
             numeroElementos--;
             addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
             this.impressao();
-            h.alocar(requisicao);                       //Aloca requisição na heap
+            alocador.alocaHeap(requisicao);         //Aloca requisição na heap
         }        
     }
     

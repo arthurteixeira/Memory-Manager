@@ -340,11 +340,18 @@ public class Principal extends javax.swing.JFrame {
             model1.addRow(new Object[]{i,""});
         }
                 
-        Heap h = new Heap(TamHeap, Integer.parseInt(t_limiarMax.getText()), this);
-        this.fila = new FilaCircular(TamReq, Integer.parseInt(t_valorMin.getText()), Integer.parseInt(t_valorMax.getText()), h, this);
+        //Heap h = new Heap(TamHeap, Integer.parseInt(t_limiarMax.getText()), this);
+        
+        mapeamentoHeap mp = new mapeamentoHeap(Integer.parseInt(t_limiarMax.getText()), TamHeap);
+        this.fila = new FilaCircular(TamReq, Integer.parseInt(t_valorMin.getText()), Integer.parseInt(t_valorMax.getText()), mp, this);
+        
         fila.removerElemento();
         fila.removerElemento();
         fila.removerElemento();
+        fila.removerElemento();
+        fila.removerElemento();
+        fila.removerElemento();
+        
         t_tamHeap.setText("");
         t_tamVetReq.setText("");
         t_limiarMax.setText("");

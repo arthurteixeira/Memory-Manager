@@ -14,10 +14,18 @@ import java.util.Random;
 public class Alocador {
     
     private int tamRestante;
+    private Principal atualiza;
+    private mapeamentoHeap mp;
+    private Desalocador dh;
     
-    void alocaHeap(Requisicao nova, mapeamentoHeap mp){
+    public Alocador(Principal p, mapeamentoHeap mp){
+        this.mp = mp;
+        this.atualiza = p;
+        this.dh = new Desalocador(p);
+    }
+    
+    void alocaHeap(Requisicao nova){
         Random random = new Random();
-        Desalocador dh = new Desalocador();
         this.tamRestante = nova.getTamanho();
         while(this.tamRestante != 0){
             for(int i = 0; i < mp.getTamHeap(); i++){
@@ -32,9 +40,19 @@ public class Alocador {
             }
             if(this.tamRestante != 0)   dh.desalocadorHeap(mp);
         }
+        
         if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * (mp.getLimiarMax() / 100))){
             dh.desalocadorHeap(mp);
         }
         mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1);
+        
+        //impressao
+        String val;
+        for(int i = 0; i < mp.heap.length; i++){
+            val = "" + mp.heap[i];
+            atualiza.atualizarHeap(val, i);
+       }
+        
     }
+    
 }

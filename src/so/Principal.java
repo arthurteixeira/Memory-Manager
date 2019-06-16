@@ -114,7 +114,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Tamanho do vetor de requisições:");
+        jLabel1.setText("Número de requisições:");
 
         jLabel3.setText("Valor máximo:");
 
@@ -206,7 +206,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         jLabel6.setText("Vetor de requisições");
@@ -309,7 +309,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -345,11 +345,6 @@ public class Principal extends javax.swing.JFrame {
         mapeamentoHeap mp = new mapeamentoHeap(Integer.parseInt(t_limiarMax.getText()), TamHeap);
         this.fila = new FilaCircular(TamReq, Integer.parseInt(t_valorMin.getText()), Integer.parseInt(t_valorMax.getText()), mp, this);
         
-        fila.removerElemento();
-        fila.removerElemento();
-        fila.removerElemento();
-        fila.removerElemento();
-        fila.removerElemento();
         fila.removerElemento();
         
         t_tamHeap.setText("");

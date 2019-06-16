@@ -19,9 +19,11 @@ public class FilaCircular {
     private mapeamentoHeap mp;           //Cria objeto da heap
     private Principal atualiza;         //Cria objeto p/ atualização das tabelas na interface
     private Alocador alocador;
+    private int tam;
     
     public FilaCircular(int tamanho, int minimo, int maximo, mapeamentoHeap mp, Principal p){
         this.fila = new Requisicao[tamanho];
+        this.tam = tamanho;
         this.inicio = 0;
         this.fim = 0;
         this.numeroElementos = 0;
@@ -61,16 +63,18 @@ public class FilaCircular {
     }
     
     public void removerElemento(){                      //Remove elementos da fila
-        if(!filaVazia()){
-            Requisicao requisicao = fila[inicio++];
-            if(inicio == fila.length){
-                inicio = 0; 
-            }
-            numeroElementos--;
-            addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
-            this.impressao();
-            alocador.alocaHeap(requisicao);         //Aloca requisição na heap
-        }        
+        for(int i = 0; i < fila.length; i++){
+            if(!filaVazia()){
+                Requisicao requisicao = fila[inicio++];
+                if(inicio == fila.length){
+                    inicio = 0; 
+                }
+                numeroElementos--;
+                //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
+                this.impressao();
+                alocador.alocaHeap(requisicao);         //Aloca requisição na heap
+            }        
+        }
     }
     
     public int getMaximoReq() {

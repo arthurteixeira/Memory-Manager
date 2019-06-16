@@ -51,7 +51,14 @@ public class Alocador {
         for(int i = 0; i < mp.heap.length; i++){
             val = "" + mp.heap[i];
             atualiza.atualizarHeap(val, i);
-       }
+        }
+        String info1, info2, info3;
+        for(int i = 0; i < mp.tabHeap.length; i++){
+            info1 = "" + mp.tabHeap[i][0];
+            info2 = "" + mp.tabHeap[i][1];
+            info3 = "" + mp.tabHeap[i][2];
+            atualiza.atualizarTab(info1, info2, info3, i);
+        }
         
     }
     

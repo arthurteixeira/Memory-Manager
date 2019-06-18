@@ -12,9 +12,9 @@ package so;
 public class Desalocador {
     
     private int calcId;
-    private Principal atualiza;
+    private Janela atualiza;
     
-    public Desalocador(Principal p){
+    public Desalocador(Janela p){
         this.atualiza = p;
     }
     

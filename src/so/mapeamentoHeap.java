@@ -18,6 +18,8 @@ public class mapeamentoHeap {
     private int     ocupacaoHeap;
     private int     limiarMax;
     private int     tamHeap;
+    public  String  logAlocacao;
+    public  String  logDesalocacao;
 
     public mapeamentoHeap(int limiarMax, int tamHeap) {
         this.limiarMax = limiarMax;
@@ -28,6 +30,8 @@ public class mapeamentoHeap {
         this.tabHeap = new int[this.tamHeap][3];
         for(int i = 0; i < this.tamHeap; i++)
             this.tabHeap[i][1] = 0;
+        this.logAlocacao = "";
+        this.logDesalocacao = "";
     }
 
     public int getUltimoId() {
@@ -42,10 +46,6 @@ public class mapeamentoHeap {
         return constDesalocacao;
     }
 
-    public void setConstDesalocacao(int constDesalocacao) {
-        this.constDesalocacao = constDesalocacao;
-    }
-
     public int getOcupacaoHeap() {
         return ocupacaoHeap;
     }
@@ -58,18 +58,8 @@ public class mapeamentoHeap {
         return limiarMax;
     }
 
-    public void setLimiarMax(int limiarMax) {
-        this.limiarMax = limiarMax;
-    }
-
     public int getTamHeap() {
         return tamHeap;
     }
-
-    public void setTamHeap(int tamHeap) {
-        this.tamHeap = tamHeap;
-    }
-    
-    
-    
+        
 }

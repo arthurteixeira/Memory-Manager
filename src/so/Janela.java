@@ -11,15 +11,19 @@ import java.awt.CardLayout;
  *
  * @author anderson
  */
-public class Tela extends javax.swing.JPanel {
+public class Janela extends javax.swing.JFrame {
 
     /**
-     * Creates new form Tela
+     * Creates new form Janela
      */
-    public Tela() {
+    public Janela() {
         initComponents();
     }
-
+    private FilaCircular fila;
+    private mapeamentoHeap mp;
+    private int maximo;
+    private int minimo;
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,14 +36,14 @@ public class Tela extends javax.swing.JPanel {
         Base = new javax.swing.JPanel();
         Requisicoes = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jSTamVetReq = new javax.swing.JSpinner();
+        jSTamReq = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
         jSValMin = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
-        jSValMax = new javax.swing.JSpinner();
-        jPanel1 = new javax.swing.JPanel();
+        btnCalcular = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jSValMax = new javax.swing.JSpinner();
         Heap = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -53,7 +57,7 @@ public class Tela extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtReq = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
@@ -73,51 +77,63 @@ public class Tela extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+
         Base.setLayout(new java.awt.CardLayout());
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 48)); // NOI18N
         jLabel1.setText("Configurações de Requisições");
 
-        jSTamVetReq.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jSTamVetReq.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jSTamReq.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
+        jSTamReq.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jSTamReq.setNextFocusableComponent(jSValMin);
 
         jLabel3.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
         jLabel3.setText("Valor minimo");
 
         jSValMin.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jSValMin.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jSValMin.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        jSValMin.setEditor(new javax.swing.JSpinner.NumberEditor(jSValMin, ""));
+        jSValMin.setNextFocusableComponent(jSValMax);
+        jSValMin.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSValMinStateChanged(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
         jLabel4.setText("Valor maximo");
 
-        jSValMax.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jSValMax.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCalcular.setBackground(new java.awt.Color(0, 204, 204));
+        btnCalcular.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        btnCalcular.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel1MouseClicked(evt);
+                btnCalcularMouseClicked(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 36)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Proximo");
+        jLabel5.setText("Calcular");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout btnCalcularLayout = new javax.swing.GroupLayout(btnCalcular);
+        btnCalcular.setLayout(btnCalcularLayout);
+        btnCalcularLayout.setHorizontalGroup(
+            btnCalcularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCalcularLayout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        btnCalcularLayout.setVerticalGroup(
+            btnCalcularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCalcularLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap())
@@ -126,18 +142,27 @@ public class Tela extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
         jLabel9.setText("Número de requisições:");
 
+        jSValMax.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
+        jSValMax.setModel(new javax.swing.SpinnerNumberModel(2, 2, null, 1));
+        jSValMax.setNextFocusableComponent(btnCalcular);
+        jSValMax.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSValMaxStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout RequisicoesLayout = new javax.swing.GroupLayout(Requisicoes);
         Requisicoes.setLayout(RequisicoesLayout);
         RequisicoesLayout.setHorizontalGroup(
             RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
+                .addContainerGap(148, Short.MAX_VALUE)
                 .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(148, 148, 148))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
                         .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -147,8 +172,8 @@ public class Tela extends javax.swing.JPanel {
                         .addGap(156, 156, 156)
                         .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jSValMin)
-                            .addComponent(jSValMax)
-                            .addComponent(jSTamVetReq, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                            .addComponent(jSTamReq, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(jSValMax))
                         .addGap(230, 230, 230))))
         );
         RequisicoesLayout.setVerticalGroup(
@@ -158,22 +183,22 @@ public class Tela extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(44, 44, 44)
                 .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSTamVetReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSTamReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSValMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(40, 40, 40)
-                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(RequisicoesLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jSValMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)))
+                .addGap(35, 35, 35)
+                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jSValMax, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addComponent(btnCalcular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
+
+        jSTamReq.getAccessibleContext().setAccessibleDescription("");
 
         Base.add(Requisicoes, "cRequisitos");
 
@@ -230,7 +255,7 @@ public class Tela extends javax.swing.JPanel {
         HeapLayout.setHorizontalGroup(
             HeapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeapLayout.createSequentialGroup()
-                .addContainerGap(719, Short.MAX_VALUE)
+                .addContainerGap(716, Short.MAX_VALUE)
                 .addComponent(btnAlocar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
             .addGroup(HeapLayout.createSequentialGroup()
@@ -247,12 +272,12 @@ public class Tela extends javax.swing.JPanel {
                             .addComponent(jSLimMax, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8)))
-                .addContainerGap(243, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
             .addGroup(HeapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(HeapLayout.createSequentialGroup()
                     .addGap(235, 235, 235)
                     .addComponent(jLabel17)
-                    .addContainerGap(598, Short.MAX_VALUE)))
+                    .addContainerGap(595, Short.MAX_VALUE)))
         );
         HeapLayout.setVerticalGroup(
             HeapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,30 +292,36 @@ public class Tela extends javax.swing.JPanel {
                 .addGroup(HeapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jSLimMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addComponent(btnAlocar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
             .addGroup(HeapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeapLayout.createSequentialGroup()
-                    .addContainerGap(265, Short.MAX_VALUE)
+                    .addContainerGap(295, Short.MAX_VALUE)
                     .addComponent(jLabel17)
                     .addGap(183, 183, 183)))
         );
 
         Base.add(Heap, "cHeap");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtReq.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
+        jtReq.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID da Requisição", "Tamanho"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jtReq);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -305,8 +336,8 @@ public class Tela extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jLabel15.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
-        jLabel15.setText("Heap");
+        jLabel15.setFont(new java.awt.Font("DejaVu Sans", 0, 18)); // NOI18N
+        jLabel15.setText("Requisições");
 
         jLabel16.setFont(new java.awt.Font("DejaVu Sans", 0, 14)); // NOI18N
         jLabel16.setText("Tabela de Controle da Heap");
@@ -318,25 +349,26 @@ public class Tela extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addGap(89, 89, 89)
+                    .addComponent(jLabel15)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
 
@@ -380,16 +412,16 @@ public class Tela extends javax.swing.JPanel {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 588, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
@@ -424,7 +456,7 @@ public class Tela extends javax.swing.JPanel {
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 975, Short.MAX_VALUE)
                         .addComponent(jScrollPane6)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,7 +469,7 @@ public class Tela extends javax.swing.JPanel {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Log da Heap", jPanel6);
@@ -455,8 +487,8 @@ public class Tela extends javax.swing.JPanel {
 
         Base.add(Resultados, "cResultados");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Base, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -465,71 +497,121 @@ public class Tela extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Base, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Tela().setVisible(true);
-            }
-        });
-    }
-    
+    private void btnCalcularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalcularMouseClicked
+        if(maximo > minimo){
+            System.out.println(jSValMin.getValue().hashCode() + "," + jSValMax.getValue().hashCode());
+            this.fila = new FilaCircular((int) this.jSTamReq.getValue(), (int) this.jSValMin.getValue(),
+                        this.jSValMax.getValue().hashCode(), mp, this);
+            CardLayout card = (CardLayout) Base.getLayout();
+            card.show(Base, "cResultados");
+        }else{
+            System.out.println("minimo maior que maximo");
+        }
+    }//GEN-LAST:event_btnCalcularMouseClicked
+
     private void btnAlocarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlocarMouseClicked
+        this.mp = new mapeamentoHeap((int) this.jSLimMax.getValue(), (int) this.jSTamHeap.getValue());
         CardLayout card = (CardLayout) Base.getLayout();
         card.show(Base, "cRequisitos");
     }//GEN-LAST:event_btnAlocarMouseClicked
 
-    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         CardLayout card = (CardLayout) Base.getLayout();
-        card.show(Base, "cResultados");
-    }//GEN-LAST:event_jPanel1MouseClicked
+        card.show(Base, "cHeap");
+    }//GEN-LAST:event_formWindowOpened
 
+    private void jSValMinStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSValMinStateChanged
+        this.minimo = (int) this.jSValMin.getValue();
+        System.out.println(minimo);
+    }//GEN-LAST:event_jSValMinStateChanged
+
+    private void jSValMaxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSValMaxStateChanged
+        this.maximo = (int) this.jSValMax.getValue();
+        System.out.println(maximo);
+    }//GEN-LAST:event_jSValMaxStateChanged
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Janela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Janela().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Base;
-    private javax.swing.JPanel Heap;
-    private javax.swing.JPanel Requisicoes;
-    private javax.swing.JPanel Resultados;
-    private javax.swing.JPanel btnAlocar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JSpinner jSLimMax;
-    private javax.swing.JSpinner jSTamHeap;
-    private javax.swing.JSpinner jSTamVetReq;
-    private javax.swing.JSpinner jSValMax;
-    private javax.swing.JSpinner jSValMin;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
+    public javax.swing.JPanel Base;
+    public javax.swing.JPanel Heap;
+    public javax.swing.JPanel Requisicoes;
+    public javax.swing.JPanel Resultados;
+    public javax.swing.JPanel btnAlocar;
+    public javax.swing.JPanel btnCalcular;
+    public javax.swing.JLabel jLabel1;
+    public javax.swing.JLabel jLabel10;
+    public javax.swing.JLabel jLabel11;
+    public javax.swing.JLabel jLabel12;
+    public javax.swing.JLabel jLabel13;
+    public javax.swing.JLabel jLabel14;
+    public javax.swing.JLabel jLabel15;
+    public javax.swing.JLabel jLabel16;
+    public javax.swing.JLabel jLabel17;
+    public javax.swing.JLabel jLabel3;
+    public javax.swing.JLabel jLabel4;
+    public javax.swing.JLabel jLabel5;
+    public javax.swing.JLabel jLabel6;
+    public javax.swing.JLabel jLabel7;
+    public javax.swing.JLabel jLabel8;
+    public javax.swing.JLabel jLabel9;
+    public javax.swing.JPanel jPanel3;
+    public javax.swing.JPanel jPanel5;
+    public javax.swing.JPanel jPanel6;
+    public javax.swing.JSpinner jSLimMax;
+    public javax.swing.JSpinner jSTamHeap;
+    public javax.swing.JSpinner jSTamReq;
+    public javax.swing.JSpinner jSValMax;
+    public javax.swing.JSpinner jSValMin;
+    public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JScrollPane jScrollPane2;
+    public javax.swing.JScrollPane jScrollPane3;
+    public javax.swing.JScrollPane jScrollPane4;
+    public javax.swing.JScrollPane jScrollPane5;
+    public javax.swing.JScrollPane jScrollPane6;
+    public javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JTable jTable2;
+    public javax.swing.JTable jTable3;
+    public javax.swing.JTextPane jTextPane1;
+    public javax.swing.JTextPane jTextPane2;
+    public javax.swing.JTextPane jTextPane3;
+    public javax.swing.JTable jtReq;
     // End of variables declaration//GEN-END:variables
 }

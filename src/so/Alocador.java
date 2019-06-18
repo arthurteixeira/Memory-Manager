@@ -14,11 +14,11 @@ import java.util.Random;
 public class Alocador {
     
     private int tamRestante;
-    private Principal atualiza;
+    private Janela atualiza;
     private mapeamentoHeap mp;
     private Desalocador dh;
     
-    public Alocador(Principal p, mapeamentoHeap mp){
+    public Alocador(Janela p, mapeamentoHeap mp){
         this.mp = mp;
         this.atualiza = p;
         this.dh = new Desalocador(p);

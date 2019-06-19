@@ -12,10 +12,10 @@ package so;
 public class Desalocador {
     
     private int calcId;
-    private Janela atualiza;
+    private Interface jan;
     
-    public Desalocador(Janela p){
-        this.atualiza = p;
+    public Desalocador(Interface jan){
+        this.jan = jan;
     }
     
     void desalocadorHeap(mapeamentoHeap mp){
@@ -33,7 +33,7 @@ public class Desalocador {
         String val;
         for(int i = 0; i < mp.heap.length; i++){
             val = "" + mp.heap[i];
-            atualiza.atualizarHeap(val, i);
+            //atualiza.atualizarHeap(val, i);
        }
     }
     

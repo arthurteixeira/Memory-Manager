@@ -17,14 +17,14 @@ public final class FilaCircular {
     private int maximoReq;              //Valor máximo das requisições
     private int minimoReq;              //Valor mínimo das requisições
     private mapeamentoHeap mp;           //Cria objeto da heap
-    private Janela atualiza;         //Cria objeto p/ atualização das tabelas na interface
+    private Interface jan;         //Cria objeto p/ atualização das tabelas na interface
     private Alocador alocador;
     private int tam;
     private int contador;
     public  String logFila = "";  
-    DefaultTableModel mt; 
+    DefaultTableModel mtReq; 
     
-    public FilaCircular(int tamanho, int minimo, int maximo, mapeamentoHeap mp, Janela j){
+    public FilaCircular(int tamanho, int minimo, int maximo, mapeamentoHeap mp, Interface jan){
         this.fila = new Requisicao[100];
         this.tam = this.contador = tamanho;
         this.inicio = 0;
@@ -32,16 +32,21 @@ public final class FilaCircular {
         this.numeroElementos = 0;
         this.maximoReq = maximo;
         this.minimoReq = minimo;
-        this.atualiza = j;
+        this.jan = jan;
         this.mp = mp;
-        mt = (DefaultTableModel) j.jtReq.getModel();
-        //this.alocador = new Alocador(j, mp);
+        
+        this.jan.tReq.removeAll();
+        this.mtReq = (DefaultTableModel) this.jan.tReq.getModel();
+        this.logFila = "";
+        
+        this.alocador = new Alocador(jan, mp);
         //Gera todas as requisições iniciais
-        System.out.println(this.minimoReq + "," + this.maximoReq);
+        //System.out.println(this.minimoReq + "," + this.maximoReq);
         while(this.contador >= 0){
             addElemento(gerarRequisicao());
             if(fila.length > 50 || filaCheia())  this.removerElemento();
         }
+        this.jan.txtLogFila.setText(logFila);
         
     }
     
@@ -59,6 +64,7 @@ public final class FilaCircular {
             numeroElementos++;
             if(fim == fila.length)
                 fim = 0;
+            this.logFila += "Requisição Criada, ID: " + objeto.getIdentificador() + ", Tamanho: " + objeto.getTamanho() + "\n";
             //System.out.println("Requisição entrou no vetor de requisições." + this.contador);
             
         }/*else{
@@ -75,7 +81,7 @@ public final class FilaCircular {
                 inicio = 0; 
             }
             this.contador--;
-            mt.addRow(new Integer[]{requisicao.getIdentificador(), requisicao.getTamanho()});
+            this.mtReq.addRow(new Integer[]{requisicao.getIdentificador(), requisicao.getTamanho()});
             //System.out.println("removeu eemento");
             numeroElementos--;
             //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila

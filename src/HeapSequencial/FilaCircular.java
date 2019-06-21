@@ -1,5 +1,6 @@
-package so;
+package HeapSequencial;
 
+import Interface.Interface;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -46,8 +47,14 @@ public final class FilaCircular {
             addElemento(gerarRequisicao());
             if(fila.length > 50 || filaCheia())  this.removerElemento();
         }
-        this.jan.txtLogFila.setText(logFila);
         
+        this.jan.txtLogFila.setText(logFila);
+        for(int i = 0; i < mp.getTamHeap(); i++){
+            alocador.mtHeap.addRow(new Integer[]{i, this.mp.heap[i]});
+            alocador.mtContHeap.addRow(new Integer[]{i,this.mp.tabHeap[i][0], this.mp.tabHeap[i][1], this.mp.tabHeap[i][2]});
+        }
+        jan.txtLogHeapAloca.setText(alocador.getHeapAloca());
+        jan.txtLogHeapDesaloca.setText(alocador.dh.getLogDesaloca());
     }
     
     private boolean filaCheia(){
@@ -86,7 +93,7 @@ public final class FilaCircular {
             numeroElementos--;
             //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
             //this.impressao();
-            //alocador.alocaHeap(requisicao);         //Aloca requisição na heap
+            alocador.alocaHeap(requisicao);         //Aloca requisição na heap
         }        
     }
     

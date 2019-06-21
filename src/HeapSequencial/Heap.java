@@ -1,4 +1,4 @@
-package so;
+package HeapSequencial;
 
 import java.util.Random;
 

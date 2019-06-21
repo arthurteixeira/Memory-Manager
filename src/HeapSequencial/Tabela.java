@@ -1,4 +1,4 @@
-package so;
+package HeapSequencial;
 
 public class Tabela {
     private int id;

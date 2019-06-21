@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package so;
+package HeapSequencial;
+
+import Interface.Interface;
 
 /**
  *
@@ -11,30 +13,31 @@ package so;
  */
 public class Desalocador {
     
-    private int calcId;
+    private float calcId;
     private Interface jan;
+    private String  logDesaloca;
     
     public Desalocador(Interface jan){
         this.jan = jan;
+        this.logDesaloca = "";
     }
     
     void desalocadorHeap(mapeamentoHeap mp){
-        calcId = mp.getUltimoId() - mp.getConstDesalocacao();
+        calcId = (float) (mp.getUltimoId() * 0.4);
+        this.logDesaloca += "Foram desalocados:\n";
         for(int i = 0; i < mp.getTamHeap(); i++){
-            if(mp.tabHeap[i][1] == 1){
-                if(mp.tabHeap[i][0] < calcId){
+            if(mp.tabHeap[i][0] < calcId){
+                if(mp.tabHeap[i][1] == 1){
                     mp.tabHeap[i][1] = 0;
+                    this.logDesaloca += "ID " + mp.tabHeap[i][0] + " desalocado da posição " + i + "\n";
                     mp.setOcupacaoHeap(mp.getOcupacaoHeap() - 1);
                 }
             }
         }
-        
-        //impressao
-        String val;
-        for(int i = 0; i < mp.heap.length; i++){
-            val = "" + mp.heap[i];
-            //atualiza.atualizarHeap(val, i);
-       }
+    }
+
+    public String getLogDesaloca() {
+        return logDesaloca;
     }
     
 }

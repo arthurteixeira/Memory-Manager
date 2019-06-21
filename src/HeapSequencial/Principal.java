@@ -1,5 +1,5 @@
 
-package so;
+package HeapSequencial;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;

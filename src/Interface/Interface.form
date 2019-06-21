@@ -3,14 +3,15 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
-    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
     <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
@@ -48,10 +49,16 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="Base">
+      <Properties>
+        <Property name="name" type="java.lang.String" value="Base" noResource="true"/>
+      </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="Heap">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="Heap" noResource="true"/>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="cHeap"/>
@@ -121,6 +128,7 @@
                   <Font name="Noto Sans" size="48" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es da Heap"/>
+                <Property name="name" type="java.lang.String" value="jLabel6" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
@@ -129,6 +137,7 @@
                   <Font name="DejaVu Sans" size="24" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tamanho da heap"/>
+                <Property name="name" type="java.lang.String" value="jLabel7" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
@@ -137,6 +146,7 @@
                   <Font name="DejaVu Sans" size="24" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="%"/>
+                <Property name="name" type="java.lang.String" value="jLabel8" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="jSLimMax">
@@ -147,6 +157,7 @@
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                   <SpinnerModel initial="50" maximum="100" minimum="50" numberType="java.lang.Integer" stepSize="5" type="number"/>
                 </Property>
+                <Property name="name" type="java.lang.String" value="jSLimMax" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSLimMaxStateChanged"/>
@@ -158,8 +169,9 @@
                   <Font name="DejaVu Sans" size="24" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                  <SpinnerModel initial="10" minimum="10" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
+                <Property name="name" type="java.lang.String" value="jSTamHeap" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSTamHeapStateChanged"/>
@@ -171,6 +183,7 @@
                   <Font name="DejaVu Sans" size="24" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Limiar Maximo"/>
+                <Property name="name" type="java.lang.String" value="jLabel17" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnAlocar">
@@ -188,6 +201,7 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
+                <Property name="name" type="java.lang.String" value="btnAlocar" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlocarActionPerformed"/>
@@ -196,6 +210,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Requisicoes">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="Requisicoes" noResource="true"/>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="cRequisitos"/>
@@ -268,6 +285,7 @@
                   <Font name="Noto Sans" size="48" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Configura&#xe7;&#xf5;es de Requisi&#xe7;&#xf5;es"/>
+                <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="jSnReq">
@@ -278,6 +296,7 @@
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                   <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
+                <Property name="name" type="java.lang.String" value="jSnReq" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSnReqStateChanged"/>
@@ -289,6 +308,7 @@
                   <Font name="DejaVu Sans" size="24" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Valor minimo"/>
+                <Property name="name" type="java.lang.String" value="jLabel3" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="jSValMin">
@@ -297,8 +317,9 @@
                   <Font name="DejaVu Sans" size="24" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                  <SpinnerModel initial="1" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
+                <Property name="name" type="java.lang.String" value="jSValMin" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSValMinStateChanged"/>
@@ -310,6 +331,7 @@
                   <Font name="DejaVu Sans" size="24" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Valor maximo"/>
+                <Property name="name" type="java.lang.String" value="jLabel4" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSpinner" name="jSValMax">
@@ -318,8 +340,9 @@
                   <Font name="DejaVu Sans" size="24" style="0"/>
                 </Property>
                 <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-                  <SpinnerModel initial="0" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                  <SpinnerModel initial="2" minimum="2" numberType="java.lang.Integer" stepSize="1" type="number"/>
                 </Property>
+                <Property name="name" type="java.lang.String" value="jSValMax" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSValMaxStateChanged"/>
@@ -331,6 +354,7 @@
                   <Font name="DejaVu Sans" size="24" style="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="N&#xfa;mero de requisi&#xe7;&#xf5;es:"/>
+                <Property name="name" type="java.lang.String" value="jLabel9" noResource="true"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
@@ -345,6 +369,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Calcular"/>
+                <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -353,6 +378,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="Resultados">
+          <Properties>
+            <Property name="name" type="java.lang.String" value="Resultados" noResource="true"/>
+          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="cResultados"/>
@@ -376,10 +404,16 @@
           </Layout>
           <SubComponents>
             <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+              <Properties>
+                <Property name="name" type="java.lang.String" value="jTabbedPane1" noResource="true"/>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel3">
+                <Container class="javax.swing.JPanel" name="pHeap">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value="pHeap" noResource="true"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Heap">
@@ -426,6 +460,9 @@
                   </Layout>
                   <SubComponents>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jScrollPane1" noResource="true"/>
+                      </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
@@ -437,24 +474,29 @@
                                 <Column editable="true" title="Valor" type="java.lang.Integer"/>
                               </Table>
                             </Property>
+                            <Property name="name" type="java.lang.String" value="tHeap" noResource="true"/>
                           </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jScrollPane2" noResource="true"/>
+                      </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTable2">
+                        <Component class="javax.swing.JTable" name="tContHeap">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="4" rowCount="4">
-                                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                                <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                              <Table columnCount="4" rowCount="0">
+                                <Column editable="true" title="Posi&#xe7;&#xe3;o" type="java.lang.Integer"/>
+                                <Column editable="true" title="Id Requisi&#xe7;&#xe3;o" type="java.lang.Integer"/>
+                                <Column editable="true" title="Bit Validade" type="java.lang.Integer"/>
+                                <Column editable="true" title="Tamanho Restante" type="java.lang.Integer"/>
                               </Table>
                             </Property>
+                            <Property name="name" type="java.lang.String" value="tContHeap" noResource="true"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -465,6 +507,7 @@
                           <Font name="DejaVu Sans" size="18" style="0"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Heap"/>
+                        <Property name="name" type="java.lang.String" value="jLabel15" noResource="true"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel16">
@@ -473,11 +516,15 @@
                           <Font name="DejaVu Sans" size="18" style="0"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Tabela de Controle da Heap"/>
+                        <Property name="name" type="java.lang.String" value="jLabel16" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel5">
+                <Container class="javax.swing.JPanel" name="pFila">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value="pFila" noResource="true"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Fila circular">
@@ -530,6 +577,9 @@
                   </Layout>
                   <SubComponents>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jScrollPane3" noResource="true"/>
+                      </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
@@ -541,11 +591,15 @@
                                 <Column editable="true" title="Tamanho" type="java.lang.Integer"/>
                               </Table>
                             </Property>
+                            <Property name="name" type="java.lang.String" value="tReq" noResource="true"/>
                           </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jScrollPane4" noResource="true"/>
+                      </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
@@ -553,6 +607,7 @@
                           <Properties>
                             <Property name="columns" type="int" value="20"/>
                             <Property name="rows" type="int" value="5"/>
+                            <Property name="name" type="java.lang.String" value="txtLogFila" noResource="true"/>
                           </Properties>
                         </Component>
                       </SubComponents>
@@ -563,6 +618,7 @@
                           <Font name="DejaVu Sans" size="18" style="0"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Log da fila circular"/>
+                        <Property name="name" type="java.lang.String" value="jLabel13" noResource="true"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel14">
@@ -571,11 +627,15 @@
                           <Font name="DejaVu Sans" size="18" style="0"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Requisi&#xe7;&#xf5;es"/>
+                        <Property name="name" type="java.lang.String" value="jLabel14" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel6">
+                <Container class="javax.swing.JPanel" name="pLogHeap">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value="pLogHeap" noResource="true"/>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                       <JTabbedPaneConstraints tabName="Log da Heap">
@@ -619,18 +679,32 @@
                   </Layout>
                   <SubComponents>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane5">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jScrollPane5" noResource="true"/>
+                      </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTextPane" name="jTextPane1">
+                        <Component class="javax.swing.JTextArea" name="txtLogHeapAloca">
+                          <Properties>
+                            <Property name="columns" type="int" value="20"/>
+                            <Property name="rows" type="int" value="5"/>
+                            <Property name="name" type="java.lang.String" value="txtLogHeapAloca" noResource="true"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane6">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jScrollPane6" noResource="true"/>
+                      </Properties>
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTextPane" name="jTextPane2">
+                        <Component class="javax.swing.JTextPane" name="txtLogHeapDesaloca">
+                          <Properties>
+                            <Property name="name" type="java.lang.String" value="txtLogHeapDesaloca" noResource="true"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -640,6 +714,7 @@
                           <Font name="DejaVu Sans" size="14" style="0"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Log de aloca&#xe7;&#xe3;o da Heap"/>
+                        <Property name="name" type="java.lang.String" value="jLabel11" noResource="true"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel12">
@@ -647,7 +722,68 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="DejaVu Sans" size="14" style="0"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Log de aloca&#xe7;&#xe3;o da Heap"/>
+                        <Property name="text" type="java.lang.String" value="Log de desaloca&#xe7;&#xe3;o da Heap"/>
+                        <Property name="name" type="java.lang.String" value="jLabel12" noResource="true"/>
+                      </Properties>
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="pControl">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value="pControl" noResource="true"/>
+                  </Properties>
+                  <Constraints>
+                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+                      <JTabbedPaneConstraints tabName="Controle">
+                        <Property name="tabTitle" type="java.lang.String" value="Controle"/>
+                      </JTabbedPaneConstraints>
+                    </Constraint>
+                  </Constraints>
+
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="318" max="32767" attributes="0"/>
+                              <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace pref="197" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jButton3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="jButton2" alignment="3" min="-2" pref="149" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JButton" name="jButton2">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/Icones/Button-Add-icon.png"/>
+                        </Property>
+                        <Property name="name" type="java.lang.String" value="jButton2" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jButton3">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/Icones/Button-Turn-Off-icon.png"/>
+                        </Property>
+                        <Property name="hideActionText" type="boolean" value="true"/>
+                        <Property name="horizontalTextPosition" type="int" value="10"/>
+                        <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>

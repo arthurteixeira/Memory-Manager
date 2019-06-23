@@ -5,20 +5,20 @@
  */
 package Interface;
 
-import HeapSequencial.FilaCircular;
-import HeapSequencial.mapeamentoHeap;
+import Paralelo.FilaCircular;
+import Paralelo.mapeamentoHeap;
 import java.awt.CardLayout;
 
 /**
  *
  * @author anderson
  */
-public class Interface extends javax.swing.JFrame {
+public class InterfaceParalela extends javax.swing.JFrame {
 
     /**
      * Creates new form Interface
      */
-    public Interface() {
+    public InterfaceParalela() {
         initComponents();
     }
     
@@ -139,7 +139,7 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Sequencial");
+        jLabel2.setText("Paralela");
         jLabel2.setName("jLabel2"); // NOI18N
 
         javax.swing.GroupLayout HeapLayout = new javax.swing.GroupLayout(Heap);
@@ -167,7 +167,7 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8))
                     .addGroup(HeapLayout.createSequentialGroup()
-                        .addGap(432, 432, 432)
+                        .addGap(421, 421, 421)
                         .addComponent(jLabel2)))
                 .addContainerGap(274, Short.MAX_VALUE))
         );
@@ -640,20 +640,21 @@ public class Interface extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceParalela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceParalela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceParalela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceParalela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Interface().setVisible(true);
+                new InterfaceParalela().setVisible(true);
             }
         });
     }

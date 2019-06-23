@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package HeapSequencial;
+package Paralelo;
 
+import HeapSequencial.*;
 import java.awt.CardLayout;
 
 /**
@@ -30,17 +31,6 @@ public class Tela extends javax.swing.JPanel {
     private void initComponents() {
 
         Base = new javax.swing.JPanel();
-        Requisicoes = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jSTamVetReq = new javax.swing.JSpinner();
-        jLabel3 = new javax.swing.JLabel();
-        jSValMin = new javax.swing.JSpinner();
-        jLabel4 = new javax.swing.JLabel();
-        jSValMax = new javax.swing.JSpinner();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         Heap = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -73,118 +63,19 @@ public class Tela extends javax.swing.JPanel {
         jTextPane2 = new javax.swing.JTextPane();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        Requisicoes = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jSTamVetReq = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
+        jSValMin = new javax.swing.JSpinner();
+        jLabel4 = new javax.swing.JLabel();
+        jSValMax = new javax.swing.JSpinner();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         Base.setLayout(new java.awt.CardLayout());
-
-        jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 48)); // NOI18N
-        jLabel1.setText("Configurações de Requisições");
-
-        jSTamVetReq.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jSTamVetReq.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-
-        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jLabel3.setText("Valor minimo");
-
-        jSValMin.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jSValMin.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-
-        jLabel4.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jLabel4.setText("Valor maximo");
-
-        jSValMax.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jSValMax.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel1MouseClicked(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Proximo");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addContainerGap())
-        );
-
-        jLabel9.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
-        jLabel9.setText("Número de requisições:");
-
-        jLabel2.setText("Sequencial");
-
-        javax.swing.GroupLayout RequisicoesLayout = new javax.swing.GroupLayout(Requisicoes);
-        Requisicoes.setLayout(RequisicoesLayout);
-        RequisicoesLayout.setHorizontalGroup(
-            RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
-                .addContainerGap(164, Short.MAX_VALUE)
-                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(148, 148, 148))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
-                        .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(156, 156, 156)
-                        .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSValMin)
-                            .addComponent(jSValMax)
-                            .addComponent(jSTamVetReq, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
-                        .addGap(230, 230, 230))))
-            .addGroup(RequisicoesLayout.createSequentialGroup()
-                .addGap(473, 473, 473)
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        RequisicoesLayout.setVerticalGroup(
-            RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(RequisicoesLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(22, 22, 22)
-                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSTamVetReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSValMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(40, 40, 40)
-                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(RequisicoesLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jSValMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)))
-                .addGap(34, 34, 34))
-        );
-
-        Base.add(Requisicoes, "cRequisitos");
 
         jLabel6.setFont(new java.awt.Font("Noto Sans", 1, 48)); // NOI18N
         jLabel6.setText("Configurações da Heap");
@@ -261,7 +152,7 @@ public class Tela extends javax.swing.JPanel {
                 .addGroup(HeapLayout.createSequentialGroup()
                     .addGap(235, 235, 235)
                     .addComponent(jLabel17)
-                    .addContainerGap(598, Short.MAX_VALUE)))
+                    .addContainerGap(626, Short.MAX_VALUE)))
         );
         HeapLayout.setVerticalGroup(
             HeapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +172,7 @@ public class Tela extends javax.swing.JPanel {
                 .addGap(31, 31, 31))
             .addGroup(HeapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeapLayout.createSequentialGroup()
-                    .addContainerGap(265, Short.MAX_VALUE)
+                    .addContainerGap(276, Short.MAX_VALUE)
                     .addComponent(jLabel17)
                     .addGap(183, 183, 183)))
         );
@@ -338,7 +229,7 @@ public class Tela extends javax.swing.JPanel {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jLabel16))
@@ -398,7 +289,7 @@ public class Tela extends javax.swing.JPanel {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(19, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
@@ -446,7 +337,7 @@ public class Tela extends javax.swing.JPanel {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Log da Heap", jPanel6);
@@ -463,6 +354,113 @@ public class Tela extends javax.swing.JPanel {
         );
 
         Base.add(Resultados, "cResultados");
+
+        jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 48)); // NOI18N
+        jLabel1.setText("Configurações de Requisições ");
+
+        jSTamVetReq.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
+        jSTamVetReq.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+
+        jLabel3.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
+        jLabel3.setText("Valor minimo");
+
+        jSValMin.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
+        jSValMin.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        jLabel4.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
+        jLabel4.setText("Valor maximo");
+
+        jSValMax.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
+        jSValMax.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("DejaVu Sans", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Proximo");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addContainerGap())
+        );
+
+        jLabel9.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
+        jLabel9.setText("Número de requisições:");
+
+        jLabel2.setText("Paralelo");
+
+        javax.swing.GroupLayout RequisicoesLayout = new javax.swing.GroupLayout(Requisicoes);
+        Requisicoes.setLayout(RequisicoesLayout);
+        RequisicoesLayout.setHorizontalGroup(
+            RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
+                .addContainerGap(151, Short.MAX_VALUE)
+                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(148, 148, 148))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RequisicoesLayout.createSequentialGroup()
+                        .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2))
+                        .addGap(156, 156, 156)
+                        .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSValMin)
+                            .addComponent(jSValMax)
+                            .addComponent(jSTamVetReq, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                        .addGap(230, 230, 230))))
+        );
+        RequisicoesLayout.setVerticalGroup(
+            RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(RequisicoesLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(21, 21, 21)
+                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSTamVetReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSValMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(40, 40, 40)
+                .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(RequisicoesLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(RequisicoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jSValMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4)))
+                .addGap(34, 34, 34))
+        );
+
+        Base.add(Requisicoes, "cRequisitos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

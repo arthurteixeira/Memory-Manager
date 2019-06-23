@@ -615,6 +615,7 @@ public class InterfaceParalela extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(this.jSValMax.getValue().hashCode() >= this.valMax){
             System.out.println(jSValMin.getValue().hashCode() + "," + jSValMax.getValue().hashCode());
+            
             this.fila = new FilaCircular(this.nReq, this.valMin, this.valMax, mp, this);
             CardLayout card = (CardLayout) Base.getLayout();
             card.show(Base, "cResultados");

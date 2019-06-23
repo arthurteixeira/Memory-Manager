@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-public final class FilaCircular {
+public final class FilaCircular implements Runnable {
     private Requisicao[] fila;          //Vetor de requisições p/ implementação da fila
     private int inicio;                 //Aponta p/ inicio da fila
     private int fim;                    //Aponta p/ o fim da filla
@@ -37,7 +37,6 @@ public final class FilaCircular {
         this.minimoReq = minimo;
         this.jan = jan;
         this.mp = mp;
-        
         this.jan.tReq.removeAll();
         this.mtReq = (DefaultTableModel) this.jan.tReq.getModel();
         this.logFila = "";
@@ -45,11 +44,17 @@ public final class FilaCircular {
         this.alocador = new Alocador(jan, mp);
         //Gera todas as requisições iniciais
         //System.out.println(this.minimoReq + "," + this.maximoReq);
+        
+        Thread t = new Thread(this);     
+        t.start();
+    }
+    
+    @Override
+    public void run(){
         while(this.contador >= 0){
             addElemento(gerarRequisicao());
             if(fila.length > 50 || filaCheia())  this.removerElemento();
         }
-        
         this.jan.txtLogFila.setText(logFila);
         for(int i = 0; i < mp.getTamHeap(); i++){
             alocador.mtHeap.addRow(new Integer[]{i, this.mp.heap[i]});
@@ -95,7 +100,8 @@ public final class FilaCircular {
             numeroElementos--;
             //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
             //this.impressao();
-            alocador.alocaHeap(requisicao);         //Aloca requisição na heap
+            alocador.alocaHeap(requisicao);         //Manda a requisicao requisição na heap
+            //alocacao.start();
         }        
     }
     
@@ -109,7 +115,7 @@ public final class FilaCircular {
     
     public Requisicao gerarRequisicao(){                //Função que gera as requisições
         Random random = new Random();
-        int tReq = random.nextInt(this.maximoReq - this.minimoReq);
+        int tReq = random.nextInt(this.maximoReq - this.minimoReq) + 1;
         tReq += this.minimoReq;
         Requisicao nova = new Requisicao(idReq, tReq);
         idReq++;

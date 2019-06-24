@@ -65,6 +65,8 @@ public class Alocador {
                 if(this.cont == mp.getTamHeap())   this.cont = 0;
                 if(this.cont == mp.getUltimoId())   dh.desalocadorHeap(mp);
         }
+        //System.out.println("\n\n=====================HEAP==================\n");
+       //System.out.println(heapAloca);
         mp.setUltimoId(cont);
         if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * mp.getLimiarMax())){
             dh.desalocadorHeap(mp);

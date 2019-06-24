@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-public final class FilaCircular implements Runnable {
+public final class FilaCircular{
     private Requisicao[] fila;          //Vetor de requisições p/ implementação da fila
     private int inicio;                 //Aponta p/ inicio da fila
     private int fim;                    //Aponta p/ o fim da filla
@@ -28,7 +28,7 @@ public final class FilaCircular implements Runnable {
     DefaultTableModel mtReq; 
     
     public FilaCircular(int tamanho, int minimo, int maximo, mapeamentoHeap mp, InterfaceParalela jan){
-        this.fila = new Requisicao[100];
+        this.fila = new Requisicao[tamanho];
         this.tam = this.contador = tamanho;
         this.inicio = 0;
         this.fim = 0;
@@ -44,26 +44,45 @@ public final class FilaCircular implements Runnable {
         this.alocador = new Alocador(jan, mp);
         //Gera todas as requisições iniciais
         //System.out.println(this.minimoReq + "," + this.maximoReq);
+        new Thread(t1).start();
+        new Thread(t2).start();
+
         
-        Thread t = new Thread(this);     
-        t.start();
     }
     
-    @Override
-    public void run(){
-        while(this.contador >= 0){
-            addElemento(gerarRequisicao());
-            if(fila.length > 50 || filaCheia())  this.removerElemento();
+     private Runnable t1 = new Runnable() {   
+        @Override
+        public void run() {
+            try{
+                for(int j = 0; j < fila.length; j++){   
+                    System.out.println("THREAD 1");
+                    addElemento(gerarRequisicao());                
+                }
+            }catch (Exception e){}
         }
+    };
+    
+    private Runnable t2 = new Runnable() {   
+        @Override
+        public void run() {
+            try{
+                Thread.sleep(1);
+                for(int i = 0; i < mp.getTamHeap(); i++){
+                    System.out.println("THREAD 2");
+                    removerElemento();
+                    alocador.mtHeap.addRow(new Integer[]{i, mp.heap[i]});
+                    alocador.mtContHeap.addRow(new Integer[]{i, mp.tabHeap[i][0], mp.tabHeap[i][1], mp.tabHeap[i][2]});
+                }
+                atualizarTables();
+            }catch (Exception e){}
+        }
+    }; 
+     
+    public void atualizarTables(){
         this.jan.txtLogFila.setText(logFila);
-        for(int i = 0; i < mp.getTamHeap(); i++){
-            alocador.mtHeap.addRow(new Integer[]{i, this.mp.heap[i]});
-            alocador.mtContHeap.addRow(new Integer[]{i,this.mp.tabHeap[i][0], this.mp.tabHeap[i][1], this.mp.tabHeap[i][2]});
-        }
         jan.txtLogHeapAloca.setText(alocador.getHeapAloca());
         jan.txtLogHeapDesaloca.setText(alocador.dh.getLogDesaloca());
     }
-    
     private boolean filaCheia(){
         return numeroElementos == fila.length;           //Verifica se a fila está cheia;
     }
@@ -98,7 +117,7 @@ public final class FilaCircular implements Runnable {
             this.mtReq.addRow(new Integer[]{requisicao.getIdentificador(), requisicao.getTamanho()});
             //System.out.println("removeu eemento");
             numeroElementos--;
-            //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
+           //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
             //this.impressao();
             alocador.alocaHeap(requisicao);         //Manda a requisicao requisição na heap
             //alocacao.start();

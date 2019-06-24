@@ -13,7 +13,7 @@ import java.awt.CardLayout;
  *
  * @author anderson
  */
-public class InterfaceParalela extends javax.swing.JFrame {
+public class InterfaceParalela extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form Interface
@@ -649,15 +649,6 @@ public class InterfaceParalela extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(InterfaceParalela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InterfaceParalela().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -707,4 +698,9 @@ public class InterfaceParalela extends javax.swing.JFrame {
     public javax.swing.JTextArea txtLogHeapAloca;
     public javax.swing.JTextPane txtLogHeapDesaloca;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        new InterfaceParalela().setVisible(true);
+    }
 }

@@ -20,6 +20,7 @@ public class Interface extends javax.swing.JFrame {
      */
     public Interface() {
         initComponents();
+        this.setVisible(true);
     }
     
     private mapeamentoHeap mp;

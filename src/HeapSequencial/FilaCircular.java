@@ -107,7 +107,10 @@ public final class FilaCircular {
     
     public Requisicao gerarRequisicao(){                //Função que gera as requisições
         Random random = new Random();
-        int tReq = random.nextInt(this.maximoReq - this.minimoReq);
+        int tReq = 0;
+        do{
+            tReq = random.nextInt(this.maximoReq - this.minimoReq);
+        }while(tReq == 0);
         tReq += this.minimoReq;
         Requisicao nova = new Requisicao(idReq, tReq);
         idReq++;

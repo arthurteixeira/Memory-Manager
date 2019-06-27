@@ -9,6 +9,7 @@ import HeapSequencial.*;
 import Interface.Interface;
 import Interface.InterfaceParalela;
 import java.util.Random;
+import java.util.concurrent.Semaphore;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +26,7 @@ public class Alocador {
     private int     cont;
     public  DefaultTableModel mtHeap;
     public  DefaultTableModel mtContHeap;
+    private Semaphore mutex;
     
     
     public Alocador(InterfaceParalela jan, mapeamentoHeap mp){
@@ -37,13 +39,14 @@ public class Alocador {
         this.mtContHeap = (DefaultTableModel) this.jan.tContHeap.getModel();
         this.mtHeap = (DefaultTableModel) this.jan.tHeap.getModel();
         this.cont = 0;
+        this.mutex = new Semaphore(1);
     }
 
     public String getHeapAloca() {
         return heapAloca;
     }
     
-    void alocaHeap(Requisicao nova){
+    void alocaHeap(Requisicao nova) throws InterruptedException{
         Random random = new Random();
         this.tamRestante = nova.getTamanho();
         this.heapAloca +=   "Requisição " + nova.getIdentificador() + " com tamanho de " + nova.getTamanho() + 
@@ -59,20 +62,30 @@ public class Alocador {
                     mp.tabHeap[cont][0] = nova.getIdentificador();
                     mp.tabHeap[cont][2] = this.tamRestante;
                     this.heapAloca += "Posição " + cont + "\n";
-                    mp.heap[cont] = random.nextInt(100000000);
+                    mp.heap[cont] = random.nextInt(99999999);
                 }
                 cont++;
+
                 if(this.cont == mp.getTamHeap())   this.cont = 0;
                 if(this.cont == mp.getUltimoId())   dh.desalocadorHeap(mp);
         }
         //System.out.println("\n\n=====================HEAP==================\n");
-       //System.out.println(heapAloca);
-        mp.setUltimoId(cont);
-        if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * mp.getLimiarMax())){
-            dh.desalocadorHeap(mp);
-        }
-        mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1);
+        //System.out.println(heapAloca);
+        
+        new Thread(desalocacao).start();
   
     }
+    
+    private Runnable desalocacao = new Runnable() {   
+        @Override
+        public void run() {
+            mp.setUltimoId(cont);
+            if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * mp.getLimiarMax())){
+                dh.desalocadorHeap(mp);
+            }
+            mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1);
+            
+        }
+    };
     
 }

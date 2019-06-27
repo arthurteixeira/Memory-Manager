@@ -26,6 +26,8 @@ public final class FilaCircular{
     private int contador;
     public  String logFila = "";  
     DefaultTableModel mtReq; 
+    private Semaphore mutex;
+    private int estado;
     
     public FilaCircular(int tamanho, int minimo, int maximo, mapeamentoHeap mp, InterfaceParalela jan){
         this.fila = new Requisicao[tamanho];
@@ -45,41 +47,92 @@ public final class FilaCircular{
         //Gera todas as requisições iniciais
         //System.out.println(this.minimoReq + "," + this.maximoReq);
         new Thread(t1).start();
-        new Thread(t2).start();
-
+        //new Thread(t2).start();
+        this.mutex = new Semaphore(1);
+        this.estado = 0;
         
     }
     
-     private Runnable t1 = new Runnable() {   
+    private Runnable t1 = new Runnable() {   
         @Override
         public void run() {
-            try{
-                for(int j = 0; j < fila.length; j++){   
-                    System.out.println("THREAD 1");
-                    addElemento(gerarRequisicao());                
-                }
-            }catch (Exception e){}
+            for(int i = 0; i < fila.length; i++){   
+                addElemento(gerarRequisicao());
+            }
+            new Thread(removerElemento).start();
+            new Thread(removerElemento).start();
+            new Thread(removerElemento).start();
         }
     };
     
-    private Runnable t2 = new Runnable() {   
+    private Runnable removerElemento = new Runnable() {   
         @Override
         public void run() {
-            try{
-                Thread.sleep(1);
-                for(int i = 0; i < mp.getTamHeap(); i++){
-                    System.out.println("THREAD 2");
-                    removerElemento();
-                    alocador.mtHeap.addRow(new Integer[]{i, mp.heap[i]});
-                    alocador.mtContHeap.addRow(new Integer[]{i, mp.tabHeap[i][0], mp.tabHeap[i][1], mp.tabHeap[i][2]});
+            while(!filaVazia()){
+                Requisicao requisicao = fila[inicio++];
+                if(inicio == fila.length){
+                    inicio = 0; 
                 }
-                atualizarTables();
-            }catch (Exception e){}
+                try {
+                    mutex.acquire();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FilaCircular.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                contador--;
+                //System.out.println("removeu eemento");
+                numeroElementos--;
+                mutex.release();
+                try {
+                    //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
+                    //this.impressao();
+                    alocador.alocaHeap(requisicao);         //Manda a requisicao requisição na heap               
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FilaCircular.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            try {
+                mutex.acquire();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FilaCircular.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            atualizarTables();
+            mutex.release();
+            Thread.interrupted();
         }
-    }; 
-     
+    };
+    
+   /* private Runnable removerElemento2 = new Runnable() {   
+        @Override
+        public void run() {
+            for(int i = fila.length/2; i < fila.length; i++){
+                if(!filaVazia()){
+                    Requisicao requisicao = fila[inicio++];
+                    if(inicio == fila.length){
+                        inicio = 0; 
+                    }
+                    contador--;            
+                              
+                    //System.out.println("removeu eemento");
+                    numeroElementos--;
+                    //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
+                    //this.impressao();
+                    alocador.alocaHeap(requisicao);         //Manda a requisicao requisição na heap                
+                }
+                if(i == fila.length - 1)
+                    atualizarTables();   
+            }
+        }
+    }; */
+    
     public void atualizarTables(){
         this.jan.txtLogFila.setText(logFila);
+        for(int i = 0; i < mp.tabHeap.length; i++){
+            alocador.mtHeap.addRow(new Integer[]{i, mp.heap[i]});
+            alocador.mtContHeap.addRow(new Integer[]{i, mp.tabHeap[i][0], mp.tabHeap[i][1], mp.tabHeap[i][2]});
+        }
+        for(int i = 0; i < fila.length; i++){
+            mtReq.addRow(new Integer[]{fila[i].getIdentificador(), fila[i].getTamanho()});
+        }
         jan.txtLogHeapAloca.setText(alocador.getHeapAloca());
         jan.txtLogHeapDesaloca.setText(alocador.dh.getLogDesaloca());
     }
@@ -107,23 +160,6 @@ public final class FilaCircular{
         
     }
     
-    public void removerElemento(){                      //Remove elementos da fila
-        if(!filaVazia()){
-            Requisicao requisicao = fila[inicio++];
-            if(inicio == fila.length){
-                inicio = 0; 
-            }
-            this.contador--;
-            this.mtReq.addRow(new Integer[]{requisicao.getIdentificador(), requisicao.getTamanho()});
-            //System.out.println("removeu eemento");
-            numeroElementos--;
-           //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
-            //this.impressao();
-            alocador.alocaHeap(requisicao);         //Manda a requisicao requisição na heap
-            //alocacao.start();
-        }        
-    }
-    
     public int getMaximoReq() {
         return maximoReq;
     }
@@ -132,9 +168,12 @@ public final class FilaCircular{
         return minimoReq;
     }
     
-    public Requisicao gerarRequisicao(){                //Função que gera as requisições
+    public Requisicao gerarRequisicao() {                //Função que gera as requisições
         Random random = new Random();
-        int tReq = random.nextInt(this.maximoReq - this.minimoReq) + 1;
+        int tReq = 0;
+        do{
+            tReq = random.nextInt(this.maximoReq - this.minimoReq);
+        }while(tReq == 0);
         tReq += this.minimoReq;
         Requisicao nova = new Requisicao(idReq, tReq);
         idReq++;

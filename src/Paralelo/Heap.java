@@ -42,6 +42,8 @@ public class Heap {
         this.impressaoTab();
     }
     
+       
+        
     public void impressao(){
         String val;
         for(int i = 0; i < Heap.length; i++){

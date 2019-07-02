@@ -28,6 +28,8 @@ public final class FilaCircular{
     DefaultTableModel mtReq; 
     private Semaphore mutex;
     private int estado;
+    private long tempInicial;
+    private long tempFinal;
     
     public FilaCircular(int tamanho, int minimo, int maximo, mapeamentoHeap mp, InterfaceParalela jan){
         this.fila = new Requisicao[tamanho];
@@ -46,6 +48,7 @@ public final class FilaCircular{
         this.alocador = new Alocador(jan, mp);
         //Gera todas as requisições iniciais
         //System.out.println(this.minimoReq + "," + this.maximoReq);
+        this.tempInicial = System.currentTimeMillis();
         new Thread(t1).start();
         //new Thread(t2).start();
         this.mutex = new Semaphore(1);
@@ -59,7 +62,6 @@ public final class FilaCircular{
             for(int i = 0; i < fila.length; i++){   
                 addElemento(gerarRequisicao());
             }
-            new Thread(removerElemento).start();
             new Thread(removerElemento).start();
             new Thread(removerElemento).start();
         }
@@ -96,6 +98,9 @@ public final class FilaCircular{
                 Logger.getLogger(FilaCircular.class.getName()).log(Level.SEVERE, null, ex);
             }
             atualizarTables();
+            tempFinal = System.currentTimeMillis();
+            long dif = (tempFinal - tempInicial);
+            System.out.println(String.format("%d em Minutos | %d em Segundos | %d em Milisegundos", dif/60000, dif/1000, dif));
             mutex.release();
             Thread.interrupted();
         }

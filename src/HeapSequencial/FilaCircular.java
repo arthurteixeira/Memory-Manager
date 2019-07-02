@@ -23,7 +23,9 @@ public final class FilaCircular {
     private int tam;
     private int contador;
     public  String logFila = "";  
-    DefaultTableModel mtReq; 
+    DefaultTableModel mtReq;
+    private long tempInicial;
+    private long tempFinal;
     
     public FilaCircular(int tamanho, int minimo, int maximo, mapeamentoHeap mp, Interface jan){
         this.fila = new Requisicao[100];
@@ -43,6 +45,7 @@ public final class FilaCircular {
         this.alocador = new Alocador(jan, mp);
         //Gera todas as requisições iniciais
         //System.out.println(this.minimoReq + "," + this.maximoReq);
+        this.tempInicial = System.currentTimeMillis();
         while(this.contador >= 0){
             addElemento(gerarRequisicao());
             if(fila.length > 50 || filaCheia())  this.removerElemento();
@@ -55,6 +58,9 @@ public final class FilaCircular {
         }
         jan.txtLogHeapAloca.setText(alocador.getHeapAloca());
         jan.txtLogHeapDesaloca.setText(alocador.dh.getLogDesaloca());
+        tempFinal = System.currentTimeMillis();
+        long dif = (tempFinal - tempInicial);
+        System.out.println(String.format("%d em Minutos | %d em Segundos | %d em Milisegundos", dif/60000, dif/1000, dif));
     }
     
     private boolean filaCheia(){
@@ -65,20 +71,16 @@ public final class FilaCircular {
         return numeroElementos == 0;                     //Verifica se a fila está vazia.
     }
     
-    public void addElemento(Requisicao objeto){          //Adiciona elementos na fila
+    public void addElemento(Requisicao objeto){          
         if(!filaCheia()){
             fila[fim++] = objeto;
             numeroElementos++;
             if(fim == fila.length)
                 fim = 0;
-            this.logFila += "Requisição Criada, ID: " + objeto.getIdentificador() + ", Tamanho: " + objeto.getTamanho() + "\n";
-            //System.out.println("Requisição entrou no vetor de requisições." + this.contador);
-            
-        }/*else{
-            System.out.println("Requisição NÃO entrou no vetor de requisições.");
-        }*/
-        //System.out.println("\nImpressao vet req:");
-        
+            this.logFila += "Requisição Criada, ID: " + 
+                    objeto.getIdentificador() + ", Tamanho: " +
+                    objeto.getTamanho() + "\n";           
+        }        
     }
     
     public void removerElemento(){                      //Remove elementos da fila
@@ -88,11 +90,11 @@ public final class FilaCircular {
                 inicio = 0; 
             }
             this.contador--;
-            this.mtReq.addRow(new Integer[]{requisicao.getIdentificador(), requisicao.getTamanho()});
-            //System.out.println("removeu eemento");
+            this.mtReq.addRow(new Integer[]{
+                requisicao.getIdentificador(), 
+                requisicao.getTamanho()
+            });
             numeroElementos--;
-            //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
-            //this.impressao();
             alocador.alocaHeap(requisicao);         //Aloca requisição na heap
         }        
     }

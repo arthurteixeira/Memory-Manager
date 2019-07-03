@@ -27,8 +27,7 @@ public class Alocador {
     public  DefaultTableModel mtHeap;
     public  DefaultTableModel mtContHeap;
     private Semaphore mutex;
-    
-    
+ 
     public Alocador(InterfaceParalela jan, mapeamentoHeap mp){
         this.mp = mp;
         this.jan = jan;

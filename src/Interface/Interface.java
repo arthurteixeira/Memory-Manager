@@ -49,7 +49,6 @@ public class Interface extends javax.swing.JFrame {
         jSTamHeap = new javax.swing.JSpinner();
         jLabel17 = new javax.swing.JLabel();
         btnAlocar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         Requisicoes = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSnReq = new javax.swing.JSpinner();
@@ -140,9 +139,6 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Sequencial");
-        jLabel2.setName("jLabel2"); // NOI18N
-
         javax.swing.GroupLayout HeapLayout = new javax.swing.GroupLayout(Heap);
         Heap.setLayout(HeapLayout);
         HeapLayout.setHorizontalGroup(
@@ -166,10 +162,7 @@ public class Interface extends javax.swing.JFrame {
                             .addComponent(jSLimMax, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSTamHeap, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8))
-                    .addGroup(HeapLayout.createSequentialGroup()
-                        .addGap(432, 432, 432)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel8)))
                 .addContainerGap(274, Short.MAX_VALUE))
         );
         HeapLayout.setVerticalGroup(
@@ -177,9 +170,7 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(HeapLayout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(32, 32, 32)
+                .addGap(54, 54, 54)
                 .addGroup(HeapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jSTamHeap, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -188,7 +179,7 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(jSLimMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addComponent(btnAlocar, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39))
         );
@@ -676,7 +667,6 @@ public class Interface extends javax.swing.JFrame {
     public javax.swing.JLabel jLabel15;
     public javax.swing.JLabel jLabel16;
     public javax.swing.JLabel jLabel17;
-    public javax.swing.JLabel jLabel2;
     public javax.swing.JLabel jLabel3;
     public javax.swing.JLabel jLabel4;
     public javax.swing.JLabel jLabel6;

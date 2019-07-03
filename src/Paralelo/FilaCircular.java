@@ -83,7 +83,7 @@ public final class FilaCircular{
                 contador--;
                 //System.out.println("removeu eemento");
                 numeroElementos--;
-                mutex.release();
+                
                 try {
                     //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
                     //this.impressao();
@@ -91,6 +91,7 @@ public final class FilaCircular{
                 } catch (InterruptedException ex) {
                     Logger.getLogger(FilaCircular.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                mutex.release();
             }
             try {
                 mutex.acquire();

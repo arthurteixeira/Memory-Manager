@@ -23,16 +23,12 @@ public class Desalocador {
     }
     
     void desalocadorHeap(mapeamentoHeap mp){
-        calcId = (float) (mp.getUltimoId() * 0.4);
+        
         this.logDesaloca += "Foram desalocados:\n";
-        for(int i = 0; i < mp.getTamHeap(); i++){
-            if(mp.tabHeap[i][0] < calcId){
-                if(mp.tabHeap[i][1] == 1){
-                    mp.tabHeap[i][1] = 0;
-                    this.logDesaloca += "ID " + mp.tabHeap[i][0] + " desalocado da posição " + i + "\n";
-                    mp.setOcupacaoHeap(mp.getOcupacaoHeap() - 1);
-                }
-            }
+        for(int i = 0; i < mp.getTamHeap(); i++){  
+            this.logDesaloca += "ID " + mp.tabHeap[i][0] + " desalocado da posição " + i + "\n"; 
+            mp.tabHeap[i][1] = 0;
+            mp.tabHeap[i][0] = 0;                      
         }
     }
 

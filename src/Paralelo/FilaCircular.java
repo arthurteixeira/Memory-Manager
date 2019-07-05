@@ -43,17 +43,12 @@ public final class FilaCircular{
         this.mp = mp;
         this.jan.tReq.removeAll();
         this.mtReq = (DefaultTableModel) this.jan.tReq.getModel();
-        this.logFila = "";
-        
+        this.logFila = "";      
         this.alocador = new Alocador(jan, mp);
-        //Gera todas as requisições iniciais
-        //System.out.println(this.minimoReq + "," + this.maximoReq);
         this.tempInicial = System.currentTimeMillis();
         new Thread(t1).start();
-        //new Thread(t2).start();
         this.mutex = new Semaphore(1);
-        this.estado = 0;
-        
+        this.estado = 0;      
     }
     
     private Runnable t1 = new Runnable() {   
@@ -63,7 +58,8 @@ public final class FilaCircular{
                 addElemento(gerarRequisicao());
             }
             new Thread(removerElemento).start();
-            new Thread(removerElemento).start();
+            //new Thread(removerElemento).start();
+            //new Thread(desalocar).start();
         }
     };
     
@@ -81,15 +77,11 @@ public final class FilaCircular{
                     Logger.getLogger(FilaCircular.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 contador--;
-                //System.out.println("removeu eemento");
-                numeroElementos--;
-                
+                numeroElementos--;       
                 try {
-                    //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
-                    //this.impressao();
                     alocador.alocaHeap(requisicao);         //Manda a requisicao requisição na heap               
                 } catch (InterruptedException ex) {
-                    Logger.getLogger(FilaCircular.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(FilaCircular.class.getName()).log(Level.SEVERE, null, ex);   
                 }
                 mutex.release();
             }
@@ -102,33 +94,10 @@ public final class FilaCircular{
             tempFinal = System.currentTimeMillis();
             long dif = (tempFinal - tempInicial);
             System.out.println(String.format("%d em Minutos | %d em Segundos | %d em Milisegundos", dif/60000, dif/1000, dif));
-            mutex.release();
+            mutex.release();      
             Thread.interrupted();
         }
     };
-    
-   /* private Runnable removerElemento2 = new Runnable() {   
-        @Override
-        public void run() {
-            for(int i = fila.length/2; i < fila.length; i++){
-                if(!filaVazia()){
-                    Requisicao requisicao = fila[inicio++];
-                    if(inicio == fila.length){
-                        inicio = 0; 
-                    }
-                    contador--;            
-                              
-                    //System.out.println("removeu eemento");
-                    numeroElementos--;
-                    //addElemento(gerarRequisicao());             //Quando remove uma requisição já gera outra na fila
-                    //this.impressao();
-                    alocador.alocaHeap(requisicao);         //Manda a requisicao requisição na heap                
-                }
-                if(i == fila.length - 1)
-                    atualizarTables();   
-            }
-        }
-    }; */
     
     public void atualizarTables(){
         this.jan.txtLogFila.setText(logFila);
@@ -156,14 +125,8 @@ public final class FilaCircular{
             numeroElementos++;
             if(fim == fila.length)
                 fim = 0;
-            this.logFila += "Requisição Criada, ID: " + objeto.getIdentificador() + ", Tamanho: " + objeto.getTamanho() + "\n";
-            //System.out.println("Requisição entrou no vetor de requisições." + this.contador);
-            
-        }/*else{
-            System.out.println("Requisição NÃO entrou no vetor de requisições.");
-        }*/
-        //System.out.println("\nImpressao vet req:");
-        
+            this.logFila += "Requisição Criada, ID: " + objeto.getIdentificador() + ", Tamanho: " + objeto.getTamanho() + "\n";    
+        }        
     }
     
     public int getMaximoReq() {

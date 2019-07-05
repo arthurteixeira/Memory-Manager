@@ -10,6 +10,8 @@ import Interface.Interface;
 import Interface.InterfaceParalela;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +29,7 @@ public class Alocador {
     public  DefaultTableModel mtHeap;
     public  DefaultTableModel mtContHeap;
     private Semaphore mutex;
+    private Thread d;
  
     public Alocador(InterfaceParalela jan, mapeamentoHeap mp){
         this.mp = mp;
@@ -39,6 +42,7 @@ public class Alocador {
         this.mtHeap = (DefaultTableModel) this.jan.tHeap.getModel();
         this.cont = 0;
         this.mutex = new Semaphore(1);
+        this.d = new Thread(desalocacao);
     }
 
     public String getHeapAloca() {
@@ -64,27 +68,64 @@ public class Alocador {
                     mp.heap[cont] = random.nextInt(99999999);
                 }
                 cont++;
-
-                if(this.cont == mp.getTamHeap())   this.cont = 0;
-                if(this.cont == mp.getUltimoId())   dh.desalocadorHeap(mp);
+                //if(this.cont == mp.getTamHeap()*0.5)   this.cont = 0;
         }
-        //System.out.println("\n\n=====================HEAP==================\n");
-        //System.out.println(heapAloca);
+      //  System.out.println("\n==============HEAP===============\n");
+      //  for(int i=0; i<mp.getTamHeap(); i++){
+          //  System.out.println("ID = " + i + " val = " + mp.heap[i]);
+       // }
         
-        new Thread(desalocacao).start();
-  
+        if(this.cont >= mp.getTamHeap()*0.5)   this.cont = 0;
+       // System.out.println("\nocp heap antes = " + mp.getOcupacaoHeap());
+        if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * 0.5)){         
+            new Thread(desalocacao).start();
+            this.setCont(0);
+            mp.setUltimoId(0);
+            mp.setOcupacaoHeap(0);
+            System.out.println("\n========== CONDIÇÃO ============");
+            System.out.println("ultimo id cont = " + mp.getUltimoId());
+            System.out.println("ocupacao heap cont = " + mp.getOcupacaoHeap());
+            System.out.println("cont = " + cont);
+        }else{
+            System.out.println("=================== ALOCAÇÃO =================");
+            System.out.println("ocupação antiga = " + mp.getOcupacaoHeap());
+            System.out.println("cont = " + cont);
+            mp.setUltimoId(cont);
+            System.out.println("novo ultimo id = " + mp.getUltimoId());
+            System.out.println("\n\n");
+        }
     }
     
     private Runnable desalocacao = new Runnable() {   
         @Override
         public void run() {
-            mp.setUltimoId(cont);
-            if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * mp.getLimiarMax())){
+            try {
                 dh.desalocadorHeap(mp);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Alocador.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("bugg thread");
             }
-            mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1);
-            
+            Thread.interrupted();
         }
     };
+    
+    public void desalocar() {           
+        if(mp.tabHeap[(int) (mp.getTamHeap()*0.5)][0] != 0){
+            System.out.println("entrou alcançou limear");
+            new Thread(desalocacao).start(); 
+        }
+    }
+
+    public int getCont() {
+        return cont;
+    }
+
+    public mapeamentoHeap getMp() {
+        return mp;
+    }
+
+    public void setCont(int cont) {
+        this.cont = cont;
+    } 
     
 }

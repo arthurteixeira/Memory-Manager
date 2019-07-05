@@ -24,7 +24,6 @@ public class Alocador {
     public  DefaultTableModel mtHeap;
     public  DefaultTableModel mtContHeap;
     
-    
     public Alocador(Interface jan, mapeamentoHeap mp){
         this.mp = mp;
         this.jan = jan;
@@ -46,8 +45,6 @@ public class Alocador {
         this.tamRestante = nova.getTamanho();
         this.heapAloca +=   "Requisição " + nova.getIdentificador() + " com tamanho de " + nova.getTamanho() + 
                             " foi alocada nas seguintes posições da heap: \n";
-        //System.out.println(" foi alocada nas seguintes posições da heap: \n" + 
-        //        "Requisição " + nova.getIdentificador() + " com tamanho de " + nova.getTamanho());
         this.cont = mp.getUltimoId();
         while(this.tamRestante != 0){
                 if(mp.tabHeap[cont][1] == 0){
@@ -61,14 +58,18 @@ public class Alocador {
                 }
                 cont++;
                 if(this.cont == mp.getTamHeap())   this.cont = 0;
-                if(this.cont == mp.getUltimoId())   dh.desalocadorHeap(mp);
+                //if(this.cont == mp.getUltimoId())   {     
+                   // System.out.println("entrou final da heap");
+                  //  dh.desalocadorHeap(mp);
+               // }
         }
         mp.setUltimoId(cont);
-        if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * mp.getLimiarMax())){
-            dh.desalocadorHeap(mp);
-        }
-        mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1);
-  
-    }
-    
+        //mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1);
+        if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * 0.5)){
+            System.out.println("entrou alcançou limear");
+            dh.desalocadorHeap(mp);  
+            mp.setUltimoId(0);
+            mp.setOcupacaoHeap(0);
+        } 
+    }  
 }

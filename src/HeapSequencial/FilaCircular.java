@@ -44,13 +44,13 @@ public final class FilaCircular {
         
         this.alocador = new Alocador(jan, mp);
         //Gera todas as requisições iniciais
-        //System.out.println(this.minimoReq + "," + this.maximoReq);
         this.tempInicial = System.currentTimeMillis();
         while(this.contador >= 0){
             addElemento(gerarRequisicao());
-            if(fila.length > 50 || filaCheia())  this.removerElemento();
+            if(fila.length > 50 || filaCheia())  this.removerElemento(); //Remove todas req. da fila
         }
         
+        //Atualiza as tabelas
         this.jan.txtLogFila.setText(logFila);
         for(int i = 0; i < mp.getTamHeap(); i++){
             alocador.mtHeap.addRow(new Integer[]{i, this.mp.heap[i]});
@@ -71,7 +71,7 @@ public final class FilaCircular {
         return numeroElementos == 0;                     //Verifica se a fila está vazia.
     }
     
-    public void addElemento(Requisicao objeto){          
+    public void addElemento(Requisicao objeto){ //Adiciona elementos no vetor de req.         
         if(!filaCheia()){
             fila[fim++] = objeto;
             numeroElementos++;
@@ -117,14 +117,5 @@ public final class FilaCircular {
         Requisicao nova = new Requisicao(idReq, tReq);
         idReq++;
         return nova;
-    }
-
-    public void impressao(){                            //Função que manda os parametros p/ atualizar as tabelas na classe principal
-        String id, tam;
-        for(int i = 0; i < fila.length; i++){
-            id = "" + fila[i].getIdentificador();
-            tam = "" + fila[i].getTamanho();
-            //atualiza.atualizarReq(id, tam, i);
-        }
     }
 }

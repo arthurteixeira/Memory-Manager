@@ -46,7 +46,7 @@ public final class FilaCircular{
         this.logFila = "";      
         this.alocador = new Alocador(jan, mp);
         this.tempInicial = System.currentTimeMillis();
-        new Thread(t1).start();
+        new Thread(t1).start(); //começa thread para gerar as requisições
         this.mutex = new Semaphore(1);
         this.estado = 0;      
     }
@@ -55,18 +55,16 @@ public final class FilaCircular{
         @Override
         public void run() {
             for(int i = 0; i < fila.length; i++){   
-                addElemento(gerarRequisicao());
+                addElemento(gerarRequisicao()); //add tds req no buffer
             }
-            new Thread(removerElemento).start();
-            //new Thread(removerElemento).start();
-            //new Thread(desalocar).start();
+            new Thread(removerElemento).start(); //cria thread de alocacao
         }
     };
     
     private Runnable removerElemento = new Runnable() {   
         @Override
         public void run() {
-            while(!filaVazia()){
+            while(!filaVazia()){ //enquanto a fila ta vazia
                 Requisicao requisicao = fila[inicio++];
                 if(inicio == fila.length){
                     inicio = 0; 
@@ -90,7 +88,7 @@ public final class FilaCircular{
             } catch (InterruptedException ex) {
                 Logger.getLogger(FilaCircular.class.getName()).log(Level.SEVERE, null, ex);
             }
-            atualizarTables();
+            atualizarTables(); //atualiza as tabelas ao final
             tempFinal = System.currentTimeMillis();
             long dif = (tempFinal - tempInicial);
             System.out.println(String.format("%d em Minutos | %d em Segundos | %d em Milisegundos", dif/60000, dif/1000, dif));
@@ -99,7 +97,7 @@ public final class FilaCircular{
         }
     };
     
-    public void atualizarTables(){
+    public void atualizarTables(){ //Atualizas as tabelas na interface grafica
         this.jan.txtLogFila.setText(logFila);
         for(int i = 0; i < mp.tabHeap.length; i++){
             alocador.mtHeap.addRow(new Integer[]{i, mp.heap[i]});
@@ -147,14 +145,5 @@ public final class FilaCircular{
         Requisicao nova = new Requisicao(idReq, tReq);
         idReq++;
         return nova;
-    }
-
-    public void impressao(){                            //Função que manda os parametros p/ atualizar as tabelas na classe principal
-        String id, tam;
-        for(int i = 0; i < fila.length; i++){
-            id = "" + fila[i].getIdentificador();
-            tam = "" + fila[i].getTamanho();
-            //atualiza.atualizarReq(id, tam, i);
-        }
     }
 }

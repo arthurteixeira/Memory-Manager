@@ -19,23 +19,20 @@ public class Desalocador {
     private float calcId;
     private InterfaceParalela jan;
     private String  logDesaloca;
-    private Semaphore a;
     
     public Desalocador(InterfaceParalela jan){
         this.jan = jan;
         this.logDesaloca = "";
-        this.a = new Semaphore(1);
     }
     
     void desalocadorHeap(mapeamentoHeap mp) throws InterruptedException{      
     this.logDesaloca += "Foram desalocados:\n";
-        //a.acquire();
         for(int i = 0; i < mp.getTamHeap(); i++){ 
             this.logDesaloca += "ID " + mp.tabHeap[i][0] + " desalocado da posição " + i + "\n";
             mp.tabHeap[i][1] = 0;
             mp.tabHeap[i][0] = 0;
+            //desaloca td a heap
         }
-        //a.release();
     }
 
     public String getLogDesaloca() {

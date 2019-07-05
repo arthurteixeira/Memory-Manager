@@ -577,6 +577,8 @@ public class Interface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAlocarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlocarActionPerformed
+        this.limMax = (float) this.jSLimMax.getValue().hashCode() / 100;
+        System.out.println(limMax);
         this.mp = new mapeamentoHeap(this.limMax, this.tamHeap);
         CardLayout card = (CardLayout) Base.getLayout();
         card.show(Base, "cRequisitos");

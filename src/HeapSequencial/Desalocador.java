@@ -28,7 +28,8 @@ public class Desalocador {
         for(int i = 0; i < mp.getTamHeap(); i++){  
             this.logDesaloca += "ID " + mp.tabHeap[i][0] + " desalocado da posição " + i + "\n"; 
             mp.tabHeap[i][1] = 0;
-            mp.tabHeap[i][0] = 0;                      
+            mp.tabHeap[i][0] = 0;  
+            //desaloca td a heap
         }
     }
 

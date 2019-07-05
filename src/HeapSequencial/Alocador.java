@@ -42,34 +42,32 @@ public class Alocador {
     
     void alocaHeap(Requisicao nova){
         Random random = new Random();
-        this.tamRestante = nova.getTamanho();
+        this.tamRestante = nova.getTamanho(); //Tamanho restante das requisições (começa como o tamanho da req.)
+        //Log da heap
         this.heapAloca +=   "Requisição " + nova.getIdentificador() + " com tamanho de " + nova.getTamanho() + 
                             " foi alocada nas seguintes posições da heap: \n";
-        this.cont = mp.getUltimoId();
-        while(this.tamRestante != 0){
-                if(mp.tabHeap[cont][1] == 0){
-                    this.tamRestante--;
-                    mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1);
-                    mp.tabHeap[cont][1] = 1;
-                    mp.tabHeap[cont][0] = nova.getIdentificador();
-                    mp.tabHeap[cont][2] = this.tamRestante;
+        this.cont = mp.getUltimoId(); //Seta o contador
+        while(this.tamRestante != 0){ //Enquanto o tam não é zero
+                if(mp.tabHeap[cont][1] == 0){ //ve se o bit de val. é 0
+                    this.tamRestante--; //Diminui o tam.restante
+                    mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1); //aumentar o num de ocupação da heap
+                    mp.tabHeap[cont][1] = 1; //Seta em 1 o bit de validade
+                    mp.tabHeap[cont][0] = nova.getIdentificador(); //Coloca id da req, na tab da heap
+                    mp.tabHeap[cont][2] = this.tamRestante; //Coloca o tam restante na tab da heap
+                    //Log da heap
                     this.heapAloca += "Posição " + cont + "\n";
-                    mp.heap[cont] = random.nextInt(100000000);
+                    mp.heap[cont] = random.nextInt(100000000); //Preenche heap com valor random
                 }
                 cont++;
-                if(this.cont == mp.getTamHeap())   this.cont = 0;
-                //if(this.cont == mp.getUltimoId())   {     
-                   // System.out.println("entrou final da heap");
-                  //  dh.desalocadorHeap(mp);
-               // }
+                if(this.cont == mp.getTamHeap())   this.cont = 0; //Se td heap foi preenchida, seta o cont com 0
         }
-        mp.setUltimoId(cont);
-        //mp.setOcupacaoHeap(mp.getOcupacaoHeap() + 1);
-        if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * 0.5)){
+        mp.setUltimoId(cont); //Seta o ultimo id alocado, com o valor do cont
+        if(mp.getOcupacaoHeap() >= (mp.getTamHeap() * mp.getLimiarMax())){ //ve se a heap passou do limiar
             System.out.println("entrou alcançou limear");
-            dh.desalocadorHeap(mp);  
-            mp.setUltimoId(0);
+            dh.desalocadorHeap(mp);  //desaloca
+            mp.setUltimoId(0);   
             mp.setOcupacaoHeap(0);
+            //seta valores p zero
         } 
     }  
 }
